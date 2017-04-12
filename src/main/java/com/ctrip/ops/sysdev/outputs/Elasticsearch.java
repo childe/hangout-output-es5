@@ -4,7 +4,7 @@ import com.ctrip.ops.sysdev.baseplugin.BaseOutput;
 import com.ctrip.ops.sysdev.render.DateFormatter;
 import com.ctrip.ops.sysdev.render.TemplateRender;
 import org.apache.log4j.Logger;
-import org.elasticsearch.action.DocWriteRequest;
+import org.elasticsearch.action.ActionRequest;
 import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -143,7 +143,7 @@ public class Elasticsearch extends BaseOutput {
                     public void afterBulk(long executionId, BulkRequest request,
                                           BulkResponse response) {
                         logger.info("bulk done with executionId: " + executionId);
-                        List<DocWriteRequest> requests = request.requests();
+                        List<ActionRequest> requests = request.requests();
                         int toBeTry = 0;
                         int totalFailed = 0;
                         for (BulkItemResponse item : response.getItems()) {
